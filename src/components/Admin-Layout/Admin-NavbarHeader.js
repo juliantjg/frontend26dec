@@ -24,7 +24,7 @@ class AdminNavbarHeader extends Component {
 
   async notifApi() {
     await axios
-      .get(`http://localhost:8000/api/notification/showAll`)
+      .get(`http://ec2-52-64-193-116.ap-southeast-2.compute.amazonaws.com:8000/api/notification/showAll`)
       .then((res) => {
         this.setState({ notifs: res.data.data });
         console.log(res.data.data);
@@ -74,7 +74,7 @@ class AdminNavbarHeader extends Component {
               className="notifDropdown adminNotif"
             >
               <div>
-              <div
+                <div
                   className="text-left mb-2 mt-2"
                   style={{ padding: "0.25rem 1.5rem" }}
                 >

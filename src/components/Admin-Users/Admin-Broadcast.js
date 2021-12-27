@@ -18,14 +18,14 @@ function MyVerticallyCenteredModal(props) {
     };
 
     await axios
-      .post(`http://localhost:8000/api/notification/broadcast`, userForm)
+      .post(`http://ec2-52-64-193-116.ap-southeast-2.compute.amazonaws.com:8000/api/notification/broadcast`, userForm)
       .then((response) => {
         setSuccessId("authSuccess");
         setErrorMsg(response.data.message);
         setLoad(false);
         setTimeout(() => {
-            window.location.reload();
-          }, 1000);
+          window.location.reload();
+        }, 1000);
       })
       .catch((response) => {
         setSuccessId("authFailed");
@@ -67,7 +67,7 @@ function MyVerticallyCenteredModal(props) {
         }}
       >
         <Modal.Body>
-        {errorCodeBlock}
+          {errorCodeBlock}
           Send a message to all the users.
           <Form.Group>
             <Form.Label>

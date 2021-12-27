@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import axios from "axios";
 import { LoaderOnConfirm } from "../stylesheet/Loader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -22,7 +22,7 @@ function BookmarkButton(props) {
     setLoad(true);
     console.log(userForm);
     await axios
-      .post(`http://localhost:8000/api/bookmark`, userForm)
+      .post(`http://ec2-52-64-193-116.ap-southeast-2.compute.amazonaws.com:8000/api/bookmark`, userForm)
       .then((response) => {
         console.log(response);
         setLoad(false);
@@ -33,7 +33,7 @@ function BookmarkButton(props) {
         setLoad(false);
       });
 
-      props.bookmark();
+    props.bookmark();
   };
 
   let loaderStyle = {
@@ -41,24 +41,24 @@ function BookmarkButton(props) {
   };
 
   var bookmarkIcon;
-  props.bookmarkStyle.text == "add" ? bookmarkIcon=faBookmarkReg : 
-  (props.bookmarkStyle.text == "remove" ? bookmarkIcon = faBookmark : bookmarkIcon=faBookmark)
- 
+  props.bookmarkStyle.text == "add" ? bookmarkIcon = faBookmarkReg :
+    (props.bookmarkStyle.text == "remove" ? bookmarkIcon = faBookmark : bookmarkIcon = faBookmark)
+
 
   if (load) {
-    var loaderBlock = <LoaderOnConfirm loaderStyle={loaderStyle}/>;
+    var loaderBlock = <LoaderOnConfirm loaderStyle={loaderStyle} />;
   } else if (!load) {
     // loaderBlock = props.bookmarkStyle.text;
-    loaderBlock = (<FontAwesomeIcon icon={bookmarkIcon} size="1x"/>);
+    loaderBlock = (<FontAwesomeIcon icon={bookmarkIcon} size="1x" />);
   }
 
   return (
-   
+
     <Button
-      variant= {props.bookmarkStyle.variant}
+      variant={props.bookmarkStyle.variant}
       onClick={(e) => {
         handleSubmit(e, assetId)
-      }}  
+      }}
       className="bookmarkBtn"
       style={props.bookmarkStyle}
       disabled={props.disabled}

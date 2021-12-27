@@ -1,39 +1,39 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
-import { withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import {LoaderOnConfirm} from "../stylesheet/Loader";
+import { LoaderOnConfirm } from "../stylesheet/Loader";
 
 
 
 function MyVerticallyCenteredModal(props) {
-     const [pullReason, setPullReason] = useState({});
-     const [load, setLoad] = useState(false);
-     const userId = props.userId;
-     const history = useHistory();
+  const [pullReason, setPullReason] = useState({});
+  const [load, setLoad] = useState(false);
+  const userId = props.userId;
+  const history = useHistory();
 
-    useEffect(async () => {
+  useEffect(async () => {
     await axios
-      .get(`http://localhost:8000/api/admin/asset/${userId}`)
+      .get(`http://ec2-52-64-193-116.ap-southeast-2.compute.amazonaws.com:8000/api/admin/asset/${userId}`)
       .then((response) => {
         setPullReason(response.data.data.pullReason);
       });
-  }, []); 
- 
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(props.userId);
 
     const userForm = {
-     pullReason: pullReason,
+      pullReason: pullReason,
       isVerified: "f",
     };
 
     setLoad(true);
 
     await axios
-      .patch(`http://localhost:8000/api/asset/${userId}`, userForm)
+      .patch(`http://ec2-52-64-193-116.ap-southeast-2.compute.amazonaws.com:8000/api/asset/${userId}`, userForm)
       .then((response) => {
         console.log(response);
         console.log("this is asset verification: " + userId);
@@ -43,13 +43,13 @@ function MyVerticallyCenteredModal(props) {
       .catch(() => {
         setLoad(false);
       });
-   /*  window.location.reload(); */
+    /*  window.location.reload(); */
   };
 
   if (load) {
-    var loaderBlock = (<LoaderOnConfirm/>);
+    var loaderBlock = (<LoaderOnConfirm />);
     var backDrop = "static";
-    
+
   } else if (!load) {
     loaderBlock = "Confirm";
     backDrop = true;
@@ -57,9 +57,9 @@ function MyVerticallyCenteredModal(props) {
 
   return (
     <Modal {...props} aria-labelledby="contained-modal-title-vcenter" backdrop={backDrop}>
-      <form  onSubmit={(e) => {
-          handleSubmit(e);
-        }}> 
+      <form onSubmit={(e) => {
+        handleSubmit(e);
+      }}>
         <Modal.Header closeButton className="modalForms">
           <Modal.Title id="contained-modal-title-vcenter">
             Reason for removal of the asset.
@@ -67,16 +67,16 @@ function MyVerticallyCenteredModal(props) {
         </Modal.Header>
         <Modal.Body>
           <Form.Group controlId="exampleForm.ControlTextarea1">
-              <Form.Label>Reason:</Form.Label>
-              <Form.Control 
-              as="textarea" 
-              rows={3} 
+            <Form.Label>Reason:</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={3}
               id="formFocus"
               value={pullReason}
               onChange={(e) => setPullReason(e.target.value)}
               placeholder="State Reason"
-              />
-            </Form.Group>
+            />
+          </Form.Group>
         </Modal.Body>
         <Modal.Footer>
           <Button className="feedBackBtn" id="submitBtn-standard" onClick={props.onHide}>

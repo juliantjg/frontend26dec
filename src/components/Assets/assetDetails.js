@@ -28,7 +28,7 @@ class AssetDetails extends Component {
   async bookmark() {
     let id = this.state.asset.id;
     await axios
-      .get(`http://localhost:8000/api/asset/${id}`)
+      .get(`http://ec2-52-64-193-116.ap-southeast-2.compute.amazonaws.com:8000/api/asset/${id}`)
       .then((response) => {
         this.setState({ asset: response.data.data });
       });
@@ -636,15 +636,15 @@ class AssetDocs extends Component {
           <tbody>
             {docs.length != 0
               ? docs.map((doc) => (
-                  <tr key={doc.id}>
-                    <td>
-                      <a href={doc.url} target="_blank">
-                        {doc.name}
-                      </a>
-                    </td>
-                    <td>{doc.created_at_formatted}</td>
-                  </tr>
-                ))
+                <tr key={doc.id}>
+                  <td>
+                    <a href={doc.url} target="_blank">
+                      {doc.name}
+                    </a>
+                  </td>
+                  <td>{doc.created_at_formatted}</td>
+                </tr>
+              ))
               : "No documents found."}
           </tbody>
         </Table>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import {LoaderOnConfirm} from "../stylesheet/Loader";
+import { LoaderOnConfirm } from "../stylesheet/Loader";
 
 function MyVerticallyCenteredModal(props) {
   const [load, setLoad] = useState(false);
@@ -16,7 +16,7 @@ function MyVerticallyCenteredModal(props) {
 
   useEffect(async () => {
     await axios
-      .get(`http://localhost:8000/api/userEmails/${groupId}`)
+      .get(`http://ec2-52-64-193-116.ap-southeast-2.compute.amazonaws.com:8000/api/userEmails/${groupId}`)
       .then((response) => {
         setEmails(response.data.data);
       });
@@ -26,13 +26,13 @@ function MyVerticallyCenteredModal(props) {
     e.preventDefault();
     console.log(props.groupId);
     const userForm = {
-        groupId: groupId,
-        user: user,
-     };
-    
+      groupId: groupId,
+      user: user,
+    };
+
     setLoad(true);
     await axios
-      .post(`http://localhost:8000/api/groups/addUser` , userForm)
+      .post(`http://ec2-52-64-193-116.ap-southeast-2.compute.amazonaws.com:8000/api/groups/addUser`, userForm)
       .then((response) => {
         setSuccessId("authSuccess");
         setErrorMsg(response.data.message);
@@ -52,7 +52,7 @@ function MyVerticallyCenteredModal(props) {
   };
 
   if (load) {
-    var loaderBlock = (<LoaderOnConfirm/>);
+    var loaderBlock = (<LoaderOnConfirm />);
     var backDrop = "static";
   } else if (!load) {
     loaderBlock = "Confirm";
@@ -80,22 +80,22 @@ function MyVerticallyCenteredModal(props) {
         }}
       >
         <Modal.Body>
-        <span>{errorCodeBlock}</span>
+          <span>{errorCodeBlock}</span>
           Enter the email of the user you would like to add to this group.
           <Form.Group>
-            <Form.Label><br/>Email:</Form.Label>
+            <Form.Label><br />Email:</Form.Label>
             <Form.Control
-                  as="select"
-                  name="emails"
-                  onChange={(e) => setUser(e.target.value)}
-                  required
-                >
-                <option value="">Select</option>
-                 {emails.map((email) => (  
-                <option value={email}>{email}</option>                  
-                  ))} 
-             
-              </Form.Control>
+              as="select"
+              name="emails"
+              onChange={(e) => setUser(e.target.value)}
+              required
+            >
+              <option value="">Select</option>
+              {emails.map((email) => (
+                <option value={email}>{email}</option>
+              ))}
+
+            </Form.Control>
             {/* <Form.Control
               rows={3}
               id="formFocus"
@@ -125,7 +125,7 @@ function MyVerticallyCenteredModal(props) {
             id="submitBtn-standard"
             value="Confirm"
           >
-             {loaderBlock}
+            {loaderBlock}
           </Button>
         </Modal.Footer>
       </form>
@@ -140,7 +140,7 @@ function AdminAddUser(props) {
   return (
     <>
       <Link
-        
+
         className="btn btn-lg add-asset-button"
         onClick={() => setModalShow(true)}
       >

@@ -25,7 +25,7 @@ function ActivateUser(props) {
     };
 
     await axios
-      .patch(`http://localhost:8000/api/groupMemberStatus`, userForm)
+      .patch(`http://ec2-52-64-193-116.ap-southeast-2.compute.amazonaws.com:8000/api/groupMemberStatus`, userForm)
       .then((response) => {
         console.log(response);
         setLoad(false);
@@ -53,7 +53,7 @@ function ActivateUser(props) {
       >
         <Button
           type="submit"
-          variant={props.status == "active" ? ("primary"):("secondary")}
+          variant={props.status == "active" ? ("primary") : ("secondary")}
           className="btn btn-primary"
           size="sm"
           userId={userId}

@@ -25,14 +25,14 @@ import { getUser } from "../../actions/securityActions";
 
 class Sidebar extends Component {
   componentDidMount() {
-      this.props
-        .getUser(localStorage.getItem("id"))
-        .then(() => {
-          this.setState({ load: false });
-        })
-        .catch(() => {
-          this.setState({ load: false });
-        });
+    this.props
+      .getUser(localStorage.getItem("id"))
+      .then(() => {
+        this.setState({ load: false });
+      })
+      .catch(() => {
+        this.setState({ load: false });
+      });
   }
 
 
@@ -78,7 +78,7 @@ class Sidebar extends Component {
   } */
 
   AdminVerified = async () => {
-    const res = await axios.get("http://localhost:8000/api/getLogoutStatus");
+    const res = await axios.get("http://ec2-52-64-193-116.ap-southeast-2.compute.amazonaws.com:8000/api/getLogoutStatus");
 
     store.dispatch({
       type: GET_LOGOUT_STATUS,
@@ -98,7 +98,7 @@ class Sidebar extends Component {
       })),
     });
 
-    axios.post("http://localhost:8000/api/checkToken").catch((error) => {
+    axios.post("http://ec2-52-64-193-116.ap-southeast-2.compute.amazonaws.com:8000/api/checkToken").catch((error) => {
       localStorage.clear();
       alert("Multiple Signin detected");
       window.location.reload();
@@ -107,7 +107,7 @@ class Sidebar extends Component {
     this.AdminVerified().then((result) => {
       console.log(result);
       if (result !== "") {
-        axios.get("http://localhost:8000/api/logout").then(() => {
+        axios.get("http://ec2-52-64-193-116.ap-southeast-2.compute.amazonaws.com:8000/api/logout").then(() => {
           localStorage.clear();
           alert(result);
           window.location.reload();
@@ -115,12 +115,12 @@ class Sidebar extends Component {
       }
     });
   };
-  
-  
+
+
   UNSAFE_componentWillMount() {
     if (localStorage.getItem("scopes") == "investor") {
       this.state.menus.splice(0, 1);
-      this.state.menus.splice(1, 1);  
+      this.state.menus.splice(1, 1);
     } else if (localStorage.getItem("scopes") == "AM") {
       this.state.menus.splice(0, 2);
       // console.log("remove inv");
@@ -147,7 +147,7 @@ class Sidebar extends Component {
     return (
       <div className="sidebar">
         <img className="logo" src={logo} alt="Logo" />
-        {localStorage.getItem("scopes") == "AM" || localStorage.getItem("scopes") == "basic" ? (""):( <div className="px-4">
+        {localStorage.getItem("scopes") == "AM" || localStorage.getItem("scopes") == "basic" ? ("") : (<div className="px-4">
           <div className=" mb-2 userLoginInfo text-center">
             <Row>
               <Col>
@@ -160,7 +160,7 @@ class Sidebar extends Component {
             </Row>
           </div>
         </div>)}
-       
+
         <hr className="w-75" />
         {this.state.menus.map((menu) => (
           <Link
@@ -175,12 +175,12 @@ class Sidebar extends Component {
           </Link>
         ))}
         <hr className="w-75" />
-        {localStorage.getItem("scopes") == "AM"  || localStorage.getItem("scopes") == "basic" ? (""):(<div className="px-4 pt-4">
+        {localStorage.getItem("scopes") == "AM" || localStorage.getItem("scopes") == "basic" ? ("") : (<div className="px-4 pt-4">
           <button className="logoutButton" onClick={this.handleGroups}>
             <FontAwesomeIcon id="icons" icon={faUsers} /> Groups
           </button>
         </div>)}
-        
+
         <div className="px-4 pt-4">
           <button className="logoutButton" onClick={this.handleClick}>
             <FontAwesomeIcon id="icons" icon={faSignOutAlt} /> Logout

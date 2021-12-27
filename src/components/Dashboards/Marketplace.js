@@ -131,7 +131,7 @@ class AMdashboard extends Component {
         });
     });
 
-    await axios.get(`http://localhost:8000/api/bookmarks`).then((response) => {
+    await axios.get(`http://ec2-52-64-193-116.ap-southeast-2.compute.amazonaws.com:8000/api/bookmarks`).then((response) => {
       this.setState({ bookmarkData: response.data.data });
     });
 
@@ -157,7 +157,7 @@ class AMdashboard extends Component {
         });
     });
 
-    await axios.get(`http://localhost:8000/api/bookmarks`).then((response) => {
+    await axios.get(`http://ec2-52-64-193-116.ap-southeast-2.compute.amazonaws.com:8000/api/bookmarks`).then((response) => {
       this.setState({ bookmarkData: response.data.data });
     });
 
@@ -318,14 +318,14 @@ class AMdashboard extends Component {
             defaultActiveKey={0}
             id="uncontrolled-tab-example"
             className="mb-3 marketplaceTabs"
-            // style={{ borderRadius: "8px" }}
-            /* variant="pills" */
+          // style={{ borderRadius: "8px" }}
+          /* variant="pills" */
           >
             {tabData.map((tabs) => (
               <Tab eventKey={tabs.id} title={tabs.title}>
                 {tabs.id == 0 ? (<span className="text-muted p-3 d-inline-block">
                   {sentenceArraySwap}
-                </span>) :("")}
+                </span>) : ("")}
                 <div className="assetCardContainer">
                   <div className="flexCol2">
                     {(() => {
@@ -432,7 +432,7 @@ class AMdashboard extends Component {
             ))}
           </Tabs>
         </div>
-       <Footer/>
+        <Footer />
       </div>
     );
   }

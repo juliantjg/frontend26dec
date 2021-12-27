@@ -18,7 +18,7 @@ function MyVerticallyCenteredModal(props) {
 
   useEffect(async () => {
     await axios
-      .get(`http://localhost:8000/api/asset/${props.id}`)
+      .get(`http://ec2-52-64-193-116.ap-southeast-2.compute.amazonaws.com:8000/api/asset/${props.id}`)
       .then((response) => {
         setAssetId(response.data.data.id);
         setReInvData(response.data.data.investorsData);
@@ -28,7 +28,7 @@ function MyVerticallyCenteredModal(props) {
 
   useEffect(async () => {
     await axios
-      .get(`http://localhost:8000/api/user/${localStorage.getItem("id")}`)
+      .get(`http://ec2-52-64-193-116.ap-southeast-2.compute.amazonaws.com:8000/api/user/${localStorage.getItem("id")}`)
       .then((response) => {
         // setInvTypes(response.data.data.investorTypes);
         setInvTypes(response.data.data.groupName);
@@ -50,7 +50,7 @@ function MyVerticallyCenteredModal(props) {
     setLoad(true);
 
     await axios
-      .post(`http://localhost:8000/api/investment`, userForm)
+      .post(`http://ec2-52-64-193-116.ap-southeast-2.compute.amazonaws.com:8000/api/investment`, userForm)
       .then((response) => {
         setSuccessId("authSuccess");
         // setErrorMsg(response.data.message);
@@ -179,8 +179,8 @@ function MyVerticallyCenteredModal(props) {
             <Modal.Body>
               {errorCodeBlock}
               <Badge variant="primary">Asset Id:{assetId}</Badge>
-              <small><br/>You are about to invest in <b>{assetTitle}.</b><br/>
-             This investment will be transacted from <b>{invTypes}</b> account.</small>
+              <small><br />You are about to invest in <b>{assetTitle}.</b><br />
+                This investment will be transacted from <b>{invTypes}</b> account.</small>
               {/* <Form.Group
                 controlId="exampleForm.ControlSelect1"
                 className="addField-animated"
@@ -262,7 +262,7 @@ function ApplyInvestModal(props) {
 
   useEffect(async () => {
     await axios
-      .get(`http://localhost:8000/api/asset/${props.id}`)
+      .get(`http://ec2-52-64-193-116.ap-southeast-2.compute.amazonaws.com:8000/api/asset/${props.id}`)
       .then((response) => {
         setReInvData(response.data.data.investorsData);
         setUserId(response.data.data.user_id);

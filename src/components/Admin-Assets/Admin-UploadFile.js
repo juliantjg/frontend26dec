@@ -22,18 +22,18 @@ const UploadFile = (props) => {
   const handleFileInput = (e) => {
     setSelectedFile(e.target.files[0]);
   };
- 
+
   const handleUpload = async (file) => {
     const userForm = {
       assetId: assetId,
       name: selectedFile.name,
     };
-  
+
     console.log(userForm);
 
     setLoad(true);
     await axios
-      .post(`http://localhost:8000/api/assetFile`, userForm)
+      .post(`http://ec2-52-64-193-116.ap-southeast-2.compute.amazonaws.com:8000/api/assetFile`, userForm)
       .then(() => {
         uploadFile(file, config);
         setTimeout(() => {
@@ -54,9 +54,9 @@ const UploadFile = (props) => {
   if (load) {
     var loaderBlock = <LoaderOnConfirm />;
   } else if (!load) {
-    if(selectedFile != null){
-      loaderBlock = ( <Button onClick={() => handleUpload(selectedFile)}>Upload</Button>)
-    }else{
+    if (selectedFile != null) {
+      loaderBlock = (<Button onClick={() => handleUpload(selectedFile)}>Upload</Button>)
+    } else {
       loaderBlock = (<Button onClick={() => handleUpload(selectedFile)} disabled>Upload</Button>)
     }
   }

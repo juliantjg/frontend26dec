@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
-import {LoaderOnConfirm} from "../stylesheet/Loader";
+import { LoaderOnConfirm } from "../stylesheet/Loader";
 
 function MyVerticallyCenteredModal(props) {
   /* const [am, setAm] = useState({});
@@ -14,7 +14,7 @@ function MyVerticallyCenteredModal(props) {
 
   /*  useEffect(async () => {
     await axios
-      .get(`http://localhost:8000/api/user/${userId}`)
+      .get(`http://ec2-52-64-193-116.ap-southeast-2.compute.amazonaws.com:8000/api/user/${userId}`)
       .then((response) => {
         setAm(response.data.data.AM);
         setInvestor(response.data.data.investor);
@@ -34,7 +34,7 @@ function MyVerticallyCenteredModal(props) {
     /* }; */
 
     await axios
-      .delete(`http://localhost:8000/api/user/${userId}` /* , userForm */)
+      .delete(`http://ec2-52-64-193-116.ap-southeast-2.compute.amazonaws.com:8000/api/user/${userId}` /* , userForm */)
       .then((response) => {
         console.log(response);
         setLoad(false);
@@ -47,7 +47,7 @@ function MyVerticallyCenteredModal(props) {
   };
 
   if (load) {
-    var loaderBlock = (<LoaderOnConfirm/>);
+    var loaderBlock = (<LoaderOnConfirm />);
     var backDrop = "static";
   } else if (!load) {
     loaderBlock = "Confirm";
@@ -72,7 +72,7 @@ function MyVerticallyCenteredModal(props) {
           Are you sure you want to delete this users access? All account data
           will be deleted.
           <Form.Group>
-            <Form.Label><br/>Confirmation:</Form.Label>
+            <Form.Label><br />Confirmation:</Form.Label>
             <Form.Control
               rows={3}
               id="formFocus"
@@ -101,7 +101,7 @@ function MyVerticallyCenteredModal(props) {
             id="submitBtn-standard"
             value="Confirm"
           >
-             {loaderBlock}
+            {loaderBlock}
           </Button>
         </Modal.Footer>
       </form>
@@ -116,7 +116,7 @@ function ConfirmationModal(props) {
   return (
     <>
       <Link
-        
+
         className="btn btn-lg add-asset-button"
         onClick={() => setModalShow(true)}
       >

@@ -33,19 +33,19 @@ function MyVerticallyCenteredModal(props) {
 
   useEffect(async () => {
     await axios
-      .get(`http://localhost:8000/api/user/${userId}`)
+      .get(`http://ec2-52-64-193-116.ap-southeast-2.compute.amazonaws.com:8000/api/user/${userId}`)
       .then((response) => {
         setAddress(response.data.data.address);
         setContact(response.data.data.contact_no);
         setName(response.data.data.name);
-       /*  setInvestorType(response.data.data.investor_type); */
+        /*  setInvestorType(response.data.data.investor_type); */
         setAm(response.data.data.AM);
         setInvestor(response.data.data.investor);
         // investor types
-       /*  setIndividual(response.data.data.individual);
-        setAustralianCompany(response.data.data.australian_company);
-        setCompanyTrustee(response.data.data.company_trustee);
-        setIndividualTrustee(response.data.data.individual_trustee); */
+        /*  setIndividual(response.data.data.individual);
+         setAustralianCompany(response.data.data.australian_company);
+         setCompanyTrustee(response.data.data.company_trustee);
+         setIndividualTrustee(response.data.data.individual_trustee); */
 
         if (response.data.data.AM == 1) {
           setAmBoolean(true);
@@ -86,7 +86,7 @@ function MyVerticallyCenteredModal(props) {
         }else{
           setIndividualTrustee(false);
         } */
-       
+
       });
   }, []);
 
@@ -106,13 +106,13 @@ function MyVerticallyCenteredModal(props) {
       /* individual: individual,
       australian_company: australianCompany,
       company_trustee: companyTrustee,
-      individual_trustee: individualTrustee,  */     
+      individual_trustee: individualTrustee,  */
     };
 
     setLoad(true);
 
     await axios
-      .put(`http://localhost:8000/api/user/${userId}`, userForm)
+      .put(`http://ec2-52-64-193-116.ap-southeast-2.compute.amazonaws.com:8000/api/user/${userId}`, userForm)
       .then((response) => {
         console.log(response);
         /* console.log("this is user type: " + investorType); */
@@ -196,7 +196,7 @@ function MyVerticallyCenteredModal(props) {
       }
     }
   } */
-  
+
 
   /* if (invBoolean == 1) {
     var selectCodeBlock = (
@@ -318,7 +318,7 @@ function MyVerticallyCenteredModal(props) {
             <div key={`inline-checkbox`} className="mb-3">
               <div>
                 <Form.Check
-                inline
+                  inline
                   type="switch"
                   name="AM"
                   id={`inline-checkbox-1`}
@@ -328,7 +328,7 @@ function MyVerticallyCenteredModal(props) {
                   checked={amBoolean}
                   disabled={amBoolean2}
                 />
-                  <Form.Check
+                <Form.Check
                   inline
                   type="switch"
                   name="Inv"

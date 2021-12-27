@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Modal, Button, Form, Row, Col } from "react-bootstrap";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import {LoaderOnConfirm} from "../stylesheet/Loader";
+import { LoaderOnConfirm } from "../stylesheet/Loader";
 
 
 function MyVerticallyCenteredModal(props) {
@@ -17,17 +17,17 @@ function MyVerticallyCenteredModal(props) {
   const [load, setLoad] = useState(false);
   const userId = props.userId;
 
-  
+
   useEffect(async () => {
     await axios
-      .get(`http://localhost:8000/api/admin/asset/${userId}`)
+      .get(`http://ec2-52-64-193-116.ap-southeast-2.compute.amazonaws.com:8000/api/admin/asset/${userId}`)
       .then((response) => {
         setAssetTitle(response.data.data.assetTitle);
         setLocation(response.data.data.location);
         setInvestmentGoal(response.data.data.investmentGoal);
         setInvestmentTerm(response.data.data.investmentTerm);
         setFormSubmitted(response.data.data.formSubmitted);
-        
+
         console.log("form sub")
         console.log(response.data.data.formSubmitted);
         if (response.data.data.formSubmitted == 1) {
@@ -56,7 +56,7 @@ function MyVerticallyCenteredModal(props) {
     setLoad(true);
 
     await axios
-      .patch(`http://localhost:8000/api/asset/${userId}`, userForm)
+      .patch(`http://ec2-52-64-193-116.ap-southeast-2.compute.amazonaws.com:8000/api/asset/${userId}`, userForm)
       .then((response) => {
         console.log(response);
         console.log("this is asset verification: " + assetTitle);
@@ -66,11 +66,11 @@ function MyVerticallyCenteredModal(props) {
       .catch(() => {
         setLoad(false);
       });
-   /*  window.location.reload(); */
+    /*  window.location.reload(); */
   };
 
   if (load) {
-    var loaderBlock = (<LoaderOnConfirm/>);
+    var loaderBlock = (<LoaderOnConfirm />);
     var backDrop = "static";
   } else if (!load) {
     loaderBlock = "Confirm";
@@ -127,55 +127,55 @@ function MyVerticallyCenteredModal(props) {
           </Form.Group>
 
           <Row className="mb-3">
-          <Form.Group as={Col}>
-            <Form.Label>Investment Goal:</Form.Label>
-            <Form.Control
-              rows={3}
-              id="formFocus"
-              className="my-1 p-3 rounded form-control form-control-md"
-              name="investmentGoal"
-              type="number"
-              value={investmentGoal}
-              onChange={(e) => setInvestmentGoal(e.target.value)}
-              placeholder=""
-            />
-          </Form.Group>
+            <Form.Group as={Col}>
+              <Form.Label>Investment Goal:</Form.Label>
+              <Form.Control
+                rows={3}
+                id="formFocus"
+                className="my-1 p-3 rounded form-control form-control-md"
+                name="investmentGoal"
+                type="number"
+                value={investmentGoal}
+                onChange={(e) => setInvestmentGoal(e.target.value)}
+                placeholder=""
+              />
+            </Form.Group>
 
-          <Form.Group as={Col}>
-            <Form.Label>Investment Term:</Form.Label>
-            <Form.Control
-              rows={3}
-              id="formFocus"
-              className="my-1 p-3 rounded form-control form-control-md"
-              name="investmentTerm"
-              type="number"
-              value={investmentTerm}
-              onChange={(e) => setInvestmentTerm(e.target.value)}
-              placeholder=""
-            />
-          </Form.Group>
+            <Form.Group as={Col}>
+              <Form.Label>Investment Term:</Form.Label>
+              <Form.Control
+                rows={3}
+                id="formFocus"
+                className="my-1 p-3 rounded form-control form-control-md"
+                name="investmentTerm"
+                type="number"
+                value={investmentTerm}
+                onChange={(e) => setInvestmentTerm(e.target.value)}
+                placeholder=""
+              />
+            </Form.Group>
           </Row>
 
           <Form.Group id="formGridCheckbox">
-          <Form.Control
-                  className="admin-verifyUserModalCheck"
-                  as="checkbox"
-                  name="formSubmitted"
-                  onChange={handleInputFormSub}
-                >
-                  <Form.Check
-                    inline
-                    label="Form requirements met"
-                    name="formSubmitted"
-                    type="checkbox"
-                    id={`inline-checkbox-1`}
-                    style={{marginLeft: "-10px"}}
-                    checked={formBoolean}
-                    disabled={formBoolean2}
-                    required
-                  />
-                </Form.Control>
-      </Form.Group>
+            <Form.Control
+              className="admin-verifyUserModalCheck"
+              as="checkbox"
+              name="formSubmitted"
+              onChange={handleInputFormSub}
+            >
+              <Form.Check
+                inline
+                label="Form requirements met"
+                name="formSubmitted"
+                type="checkbox"
+                id={`inline-checkbox-1`}
+                style={{ marginLeft: "-10px" }}
+                checked={formBoolean}
+                disabled={formBoolean2}
+                required
+              />
+            </Form.Control>
+          </Form.Group>
         </Modal.Body>
         <Modal.Footer>
           <Button
@@ -192,9 +192,9 @@ function MyVerticallyCenteredModal(props) {
             id="submitBtn-standard"
             value="Confirm"
           >
-             {loaderBlock}
+            {loaderBlock}
           </Button>
-         
+
         </Modal.Footer>
       </form>
     </Modal>

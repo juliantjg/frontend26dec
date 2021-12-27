@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import axios from "axios";
-import {LoaderOnConfirm} from "../stylesheet/Loader";
+import { LoaderOnConfirm } from "../stylesheet/Loader";
 
 function MyVerticallyCenteredModal(props) {
   var amount2 = props.amount;
@@ -23,7 +23,7 @@ function MyVerticallyCenteredModal(props) {
     setLoad(true);
 
     await axios
-      .put(`http://localhost:8000/api/investment/${props.id}`, userForm)
+      .put(`http://ec2-52-64-193-116.ap-southeast-2.compute.amazonaws.com:8000/api/investment/${props.id}`, userForm)
       .then((response) => {
         console.log(response);
         setLoad(false);
@@ -32,11 +32,11 @@ function MyVerticallyCenteredModal(props) {
       .catch(() => {
         setLoad(false);
       });
-   
+
   };
 
   if (load) {
-    var loaderBlock = (<LoaderOnConfirm/>);
+    var loaderBlock = (<LoaderOnConfirm />);
     var backDrop = "static";
   } else if (!load) {
     loaderBlock = "Confirm";
@@ -55,7 +55,7 @@ function MyVerticallyCenteredModal(props) {
         }}
       >
         <Modal.Body>
-          
+
           <Form.Group>
             <Form.Label>Investment number:</Form.Label>
             <Form.Control
@@ -68,7 +68,7 @@ function MyVerticallyCenteredModal(props) {
               disabled
             />
           </Form.Group>
-          
+
           <Form.Group>
             <Form.Label>Amount:</Form.Label>
             <Form.Control
@@ -83,9 +83,9 @@ function MyVerticallyCenteredModal(props) {
             />
           </Form.Group>
 
-  
 
-          
+
+
         </Modal.Body>
         <Modal.Footer>
           <Button
@@ -113,10 +113,10 @@ function MyVerticallyCenteredModal(props) {
 function VerifyInvModal(props) {
   const [modalShow, setModalShow] = React.useState(false);
   // const [id] = React.useState(props.id);
-  if(props.status == 1){
+  if (props.status == 1) {
     /* var disable = "true" */
     var invStatus = "Update"
-  }else{
+  } else {
     invStatus = "Approve"
   }
   return (
@@ -126,11 +126,11 @@ function VerifyInvModal(props) {
         className="btn btn-primary"
         size="sm"
         onClick={() => setModalShow(true)}
-        /* disabled={disable} */
+      /* disabled={disable} */
       >
-       {invStatus}
+        {invStatus}
       </Button>
-      
+
 
       <MyVerticallyCenteredModal
         show={modalShow}
